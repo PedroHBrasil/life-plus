@@ -1,3 +1,4 @@
+#[derive(Debug, Copy, Clone)]
 pub struct Color {
   pub red: u8,
   pub green: u8,
@@ -5,6 +6,7 @@ pub struct Color {
   pub alpha: u8
 }
 
+#[derive(Debug, Copy, Clone)]
 pub struct Coord {
   pub x: u16,
   pub y: u16,

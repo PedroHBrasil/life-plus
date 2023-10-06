@@ -11,6 +11,7 @@ serde = "1.0.*"
 futures = "*"
 reqwest = {version = "*", features = ["json"]}
 async-recursion = "*"
+rand = "0.8.5"
 
 [features]
 default = []

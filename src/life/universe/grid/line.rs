@@ -1,14 +1,6 @@
-use crate::util::{Coord, Color};
+use crate::util::Coord;
 
 pub struct Line {
-  start: Coord,
+  begin: Coord,
   end: Coord,
-  color: Color,
-  width: u8,
-}
-
-impl Line {
-  pub fn new() -> Self {
-    unimplemented!()
-  }
 }

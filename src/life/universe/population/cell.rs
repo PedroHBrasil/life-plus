@@ -1,13 +1,9 @@
-use crate::util::{Coord, Color};
-
 pub struct Cell {
   pub lives: bool,
-  pub origin: Coord,
-  pub size: u16,
-  pub color: Color,
 }
 
 impl Cell {
+  /// Updates the life state of a cell
   pub fn update_life(&mut self, n_alive_neighbors: u8) {
     // This line summarizes the original rules found at https://conwaylife.com/
     self.lives = n_alive_neighbors == 3 || (n_alive_neighbors == 2 && self.lives);
@@ -20,12 +16,7 @@ mod tests {
 
   #[test]
   fn update_life() {
-    let mut cell = Cell {
-      lives: false,
-      origin: Coord{x: 0, y: 0},
-      size: 1,
-      color: Color{red: 255, green: 0, blue: 0, alpha: 255},
-    };
+    let mut cell = Cell { lives: false };
 
     // Tests for initially dead cell
     for i in 0..=9 {
