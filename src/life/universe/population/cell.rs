@@ -1,3 +1,4 @@
+#[derive(Default, Clone)]
 pub struct Cell {
   pub lives: bool,
 }
