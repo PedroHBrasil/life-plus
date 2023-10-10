@@ -1,6 +1,12 @@
 # Life-Plus
 
-"Enhanced" version of Conway's Game of Life for the Web.
+"Enhanced" (not yet) version of Conway's Game of Life for the Web (not yet).
+
+## Running
+
+To run the game, you need to have Rust installed and to open a terminal and set the current directory to life-plus and execute `cargo run`.
+
+The file ./settings/settings.toml allows for set up of different parameters of the simulation, such as colors and speed.
 
 ## Features (Under Development)
 

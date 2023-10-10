@@ -1,0 +1,30 @@
+[universe]
+width = 800
+height = 450
+speed = 1
+
+[universe.color]
+red = 0x22
+green = 0x22
+blue = 0x22
+alpha = 0xff
+
+
+[lines]
+thickness = 1
+
+[lines.color]
+red = 0x44
+green = 0x44
+blue = 0x44
+alpha = 0xff
+
+
+[cells]
+size = 10
+
+[cells.color]
+red = 0x66
+green = 0x44
+blue = 0xff
+alpha = 0xff
