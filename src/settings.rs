@@ -1,15 +1,13 @@
 use std::{error::Error, path::Path, fs};
-use serde::Deserialize;
 use crate::util::Color;
 
-#[derive(Deserialize)]
+#[derive(Default)]
 pub struct Settings {
   pub universe: UniverseSettings,
   pub lines: LineSettings,
   pub cells: CellSettings,
 }
 
-#[derive(Deserialize)]
 pub struct UniverseSettings {
   pub width: usize,
   pub height: usize,
@@ -17,25 +15,56 @@ pub struct UniverseSettings {
   pub color: Color,
 }
 
-#[derive(Deserialize)]
+impl Default for UniverseSettings {
+  fn default() -> Self {
+    Self {
+      width: 800,
+      height: 450,
+      speed: 1,
+      color: Color {
+        red: 0x22,
+        green: 0x22,
+        blue: 0x22,
+        alpha: 0xff,
+      }
+    }
+  }
+}
+
 pub struct LineSettings {
   pub thickness: u8,
   pub color: Color,
 }
 
-#[derive(Deserialize)]
+impl Default for LineSettings {
+  fn default() -> Self {
+    Self {
+      thickness: 1,
+      color: Color {
+        red: 0x44,
+        green: 0x44,
+        blue: 0x44,
+        alpha: 0xff,
+      }
+    }
+  }
+}
+
 pub struct CellSettings {
   pub size: usize,
   pub color: Color,
 }
 
-
-impl Settings {
-  pub fn load() -> Result<Self, Box<dyn Error>> {
-    let settings_file_path = Path::new("./settings/settings.toml");
-    let settings_str = fs::read_to_string(settings_file_path)?;
-    let settings: Settings = toml::from_str(&settings_str)?;
-
-    Ok(settings)
+impl Default for CellSettings {
+  fn default() -> Self {
+    Self {
+      size: 10,
+      color: Color {
+        red: 0x66,
+        green: 0x44,
+        blue: 0xff,
+        alpha: 0xff,
+      }
+    }
   }
 }

@@ -1,3 +1,4 @@
+use dioxus::prelude::*;
 use crate::{settings, util::Color};
 mod population;
 mod grid;
@@ -19,5 +20,9 @@ impl Universe {
 
   pub fn update_population(&mut self) {
     self.population.update();
+  }
+
+  pub fn render<'a>(&'a self, cx: Scope<'a>, settings: &settings::Settings) -> Element {
+    self.grid.render(cx, settings.universe.width, settings.universe.height)
   }
 }

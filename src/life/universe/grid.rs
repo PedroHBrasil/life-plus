@@ -1,3 +1,4 @@
+use dioxus::prelude::*;
 use crate::{util::Coord, settings};
 
 mod line;
@@ -52,5 +53,20 @@ impl Grid {
       };
       lines.push(line);
     }
+  }
+
+  pub fn render<'a>(&'a self, cx: Scope<'a>, width: usize, height: usize) -> Element {
+    cx.render(rsx!(
+      svg {
+        x: 0 as i64,
+        y: 0 as i64,
+        width: width as i64,
+        height: height as i64,
+        stroke: "black",
+        for line in self.lines.iter() {
+          line.render(cx)
+        }
+      }
+    ))
   }
 }

@@ -1,3 +1,5 @@
+use std::env;
+
 use dioxus::prelude::*;
 
 mod life;
