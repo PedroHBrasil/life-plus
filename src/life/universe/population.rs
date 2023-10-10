@@ -1,4 +1,4 @@
-use crate::{settings, util};
+use crate::{settings, util::{self, Drawable}};
 
 mod cell;
 
@@ -25,12 +25,12 @@ impl Population {
   fn init_cells(settings: &settings::Settings, n_rows: usize, n_cols: usize) -> Vec<Vec<cell::Cell>> {
     let mut cells = Vec::with_capacity(n_rows);
     for i in 0..n_rows {
-      let y = i / n_rows * settings.universe.height;
+      let y = (i * settings.universe.height) / n_rows;
       let mut row_cells = Vec::with_capacity(n_cols);
       for j in 0..n_cols {
-        let x = j / n_cols * settings.universe.width;
+        let x = (j * settings.universe.width) / n_cols;
         let cell = cell::Cell {
-          lives: Default::default(),
+          lives: rand::random(),
           origin: util::Coord { x, y },
           color: settings.cells.color,
           size: settings.cells.size,
@@ -48,7 +48,9 @@ impl Population {
     let mut alive_neighbors_counts = Vec::with_capacity(n_rows);
     for _ in 0..n_rows {
       let mut row_alive_neighbors_counts = Vec::with_capacity(n_cols);
-      row_alive_neighbors_counts.fill(u8::default());
+      for _ in 0..n_cols {
+        row_alive_neighbors_counts.push(0);
+      }
       alive_neighbors_counts.push(row_alive_neighbors_counts);
     }
 
@@ -262,4 +264,14 @@ impl Population {
     count
   }
 
+}
+
+impl Drawable for Population {
+  fn draw(&self, graphics: &mut speedy2d::Graphics2D) {
+    for cell_row in self.cells.iter() {
+      for cell in cell_row {
+        cell.draw(graphics);
+      }
+    }
+  }
 }

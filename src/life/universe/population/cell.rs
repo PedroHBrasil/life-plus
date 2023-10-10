@@ -1,5 +1,4 @@
-use crate::util::{Coord, Color, GameElement};
-use dioxus::prelude::*;
+use crate::util::{Coord, Color, Drawable};
 
 #[derive(Default, Debug, Copy, Clone)]
 pub struct Cell {
@@ -17,10 +16,17 @@ impl Cell {
   }
 }
 
-impl GameElement for Cell {
-    fn render (ctx: Scope) -> Element {
-        todo!()
-    }
+impl Drawable for Cell {
+  fn draw(&self, graphics: &mut speedy2d::Graphics2D) {
+    if !self.lives { return }
+
+    let start = self.origin.as_tuple();
+    let end = (
+      self.origin.x as f32 + self.size as f32,
+      self.origin.y as f32 + self.size as f32);
+    let square = speedy2d::shape::Rectangle::from_tuples(start, end);
+    graphics.draw_rectangle(square, self.color.as_speedy2d_color());
+  }
 }
 
 #[cfg(test)]

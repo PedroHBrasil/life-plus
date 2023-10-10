@@ -1,7 +1,7 @@
 [universe]
 width = 800
 height = 450
-speed = 1.0
+speed = 1
 
 [universe.color]
 red = 0x22

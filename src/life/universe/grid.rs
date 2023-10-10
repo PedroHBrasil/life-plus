@@ -1,4 +1,4 @@
-use crate::{util::{Coord, Color}, settings};
+use crate::{util::{Coord, Drawable}, settings};
 
 mod line;
 
@@ -26,7 +26,7 @@ impl Grid {
 
   fn make_horizontal_lines(lines: &mut Vec<line::Line>, n_rows: usize, settings: &settings::Settings) {
     let n_horizontal_lines = n_rows + 1;
-    let lines_spacing = n_rows / settings.universe.height;
+    let lines_spacing = settings.universe.height / n_rows;
     for i in 0..n_horizontal_lines {
       let y = i * lines_spacing;
       let line = line::Line {
@@ -41,7 +41,7 @@ impl Grid {
 
   fn make_vertical_lines(lines: &mut Vec<line::Line>, n_cols: usize, settings: &settings::Settings) {
     let n_vertical_lines = n_cols + 1;
-    let lines_spacing = n_cols / settings.universe.width;
+    let lines_spacing = settings.universe.width / n_cols;
     for i in 0..n_vertical_lines {
       let x = i * lines_spacing;
       let line = line::Line {
@@ -51,6 +51,14 @@ impl Grid {
         color: settings.lines.color
       };
       lines.push(line);
+    }
+  }
+}
+
+impl Drawable for Grid {
+  fn draw(&self, graphics: &mut speedy2d::Graphics2D) {
+    for line in self.lines.iter() {
+      line.draw(graphics);
     }
   }
 }

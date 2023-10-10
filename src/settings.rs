@@ -13,7 +13,7 @@ pub struct Settings {
 pub struct UniverseSettings {
   pub width: usize,
   pub height: usize,
-  pub speed: f32,
+  pub speed: u64,
   pub color: Color,
 }
 
