@@ -1,11 +1,20 @@
-use speedy2d::window::{WindowHandler, WindowHelper};
-use speedy2d::Graphics2D;
 use crate::settings;
-use crate::util::Drawable;
+use dioxus::html::canvas;
+use dioxus::prelude::*;
 use std::thread;
 use std::time::Duration;
 
 mod universe;
+
+pub fn run(cx: Scope) -> Element {
+  // let life = Life::new();
+
+  cx.render(rsx! {
+    div {
+      "Hello World"
+    }
+  })
+}
 
 pub struct Life {
   universe: universe::Universe,
@@ -20,16 +29,4 @@ impl Life {
       speed: settings.universe.speed,
     }
   }
-}
-
-impl WindowHandler for Life {
-  fn on_draw(&mut self, helper: &mut WindowHelper, graphics: &mut Graphics2D)
-    {
-        self.universe.draw(graphics);
-
-        thread::sleep(Duration::from_millis(1000 / self.speed));
-        helper.request_redraw();
-
-        self.universe.update_population();
-    }
 }

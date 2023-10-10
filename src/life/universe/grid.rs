@@ -1,4 +1,4 @@
-use crate::{util::{Coord, Drawable}, settings};
+use crate::{util::Coord, settings};
 
 mod line;
 
@@ -51,14 +51,6 @@ impl Grid {
         color: settings.lines.color
       };
       lines.push(line);
-    }
-  }
-}
-
-impl Drawable for Grid {
-  fn draw(&self, graphics: &mut speedy2d::Graphics2D) {
-    for line in self.lines.iter() {
-      line.draw(graphics);
     }
   }
 }

@@ -1,6 +1,4 @@
-use crate::{settings, util::{Color, Drawable}};
-use speedy2d::Graphics2D;
-
+use crate::{settings, util::Color};
 mod population;
 mod grid;
 
@@ -21,13 +19,5 @@ impl Universe {
 
   pub fn update_population(&mut self) {
     self.population.update();
-  }
-}
-
-impl Drawable for Universe {
-  fn draw(&self, graphics: &mut Graphics2D) {
-    graphics.clear_screen(self.color.as_speedy2d_color());
-    self.population.draw(graphics);
-    self.grid.draw(graphics);
   }
 }

@@ -1,4 +1,4 @@
-use crate::{settings, util::{self, Drawable}};
+use crate::{settings, util};
 
 mod cell;
 
@@ -266,12 +266,3 @@ impl Population {
 
 }
 
-impl Drawable for Population {
-  fn draw(&self, graphics: &mut speedy2d::Graphics2D) {
-    for cell_row in self.cells.iter() {
-      for cell in cell_row {
-        cell.draw(graphics);
-      }
-    }
-  }
-}

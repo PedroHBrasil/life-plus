@@ -1,10 +1,9 @@
-use speedy2d::Window;
+use dioxus::prelude::*;
 
 mod life;
 mod util;
 mod settings;
 
 fn main() {
-  let window = Window::new_centered("Title", (1000, 1000)).unwrap();
-  window.run_loop(life::Life::new());
+  dioxus_web::launch(life::run);
 }
