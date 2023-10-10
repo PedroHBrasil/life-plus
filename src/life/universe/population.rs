@@ -72,10 +72,10 @@ impl Population {
     self.update_alive_neighbors_counts_top_row();
     // Mid rows
     for i in 1..self.n_rows-1 {
-      self.count_cells_alive_neighbors_mid_row(i);
+      self.update_alive_neighbors_counts_mid_row(i);
     }
     // Last row
-    self.count_cells_alive_neighbors_bottom_row();
+    self.update_alive_neighbors_counts_bottom_row();
   }
 
   fn update_alive_neighbors_counts_top_row(&mut self) {
@@ -89,7 +89,7 @@ impl Population {
     self.alive_neighbors_counts[0][self.n_cols - 1] = self.count_top_right_cell_alive_neighbors();
   }
 
-  fn count_cells_alive_neighbors_mid_row(&mut self, i: usize) {
+  fn update_alive_neighbors_counts_mid_row(&mut self, i: usize) {
     // Left most cell
     self.alive_neighbors_counts[i][0] = self.count_left_cell_alive_neighbors(i);
     // Mid cells
@@ -100,7 +100,7 @@ impl Population {
     self.alive_neighbors_counts[i][self.n_cols - 1] = self.count_right_cell_alive_neighbors(i);
   }
 
-  fn count_cells_alive_neighbors_bottom_row(&mut self) {
+  fn update_alive_neighbors_counts_bottom_row(&mut self) {
     // Bottom left cell
     self.alive_neighbors_counts[self.n_rows - 1][0] = self.count_bottom_left_cell_alive_neighbors();
     // Bottom most cells
