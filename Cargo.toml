@@ -6,12 +6,9 @@ edition = "2021"
 [dependencies]
 dioxus = "0.4.0"
 dioxus-fullstack = "0.4.1"
-chrono = {version = "0.4.*", features = ["serde"]}
-serde = "1.0.*"
-futures = "*"
-reqwest = {version = "*", features = ["json"]}
-async-recursion = "*"
-rand = "0.8.5"
+getrandom = { version = "0.2.10", features = ["js"] }
+serde = { version = "1.0.*", features = ["derive"] }
+toml = "0.8.2"
 
 [features]
 default = []

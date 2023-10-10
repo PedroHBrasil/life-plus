@@ -1,9 +1,9 @@
-// use dioxus_fullstack::prelude::*;
+use dioxus_fullstack::prelude::*;
 
-// mod components;
 mod life;
 mod util;
+mod settings;
 
 fn main() {
-    // LaunchBuilder::new(components::App).launch();
+    LaunchBuilder::new(life::Life::run).launch();
 }

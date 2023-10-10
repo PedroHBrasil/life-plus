@@ -1,17 +1,18 @@
+use crate::settings;
+
 mod population;
 mod grid;
 
-struct Universe {
+pub struct Universe {
   population: population::Population,
   grid: grid::Grid,
 }
 
 impl Universe {
-  fn new() -> Self {
-    unimplemented!()
-  }
-
-  fn update_population() {
-    unimplemented!()
+  pub fn new(settings: settings::Settings) -> Self {
+    Self {
+      population: population::Population::new(&settings),
+      grid: grid::Grid::new(&settings),
+    }
   }
 }

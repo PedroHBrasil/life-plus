@@ -1,3 +1,5 @@
+use crate::{settings, util};
+
 mod cell;
 
 pub struct Population {
@@ -8,9 +10,11 @@ pub struct Population {
 }
 
 impl Population {
-  pub fn new(n_rows: usize, n_cols: usize) -> Self {
+  pub fn new(settings: &settings::Settings) -> Self {
+    let n_rows = settings.universe.height / settings.cells.size;
+    let n_cols = settings.universe.width / settings.cells.size;
     Self {
-      cells: Self::init_cells(n_rows, n_cols),
+      cells: Self::init_cells(settings, n_rows, n_cols),
       n_rows,
       n_cols,
       alive_neighbors_counts: Self::init_alive_neighbors_counts(n_rows, n_cols),
@@ -18,11 +22,21 @@ impl Population {
   }
 
   /// Initializes the cells
-  fn init_cells(n_rows: usize, n_cols: usize) -> Vec<Vec<cell::Cell>> {
+  fn init_cells(settings: &settings::Settings, n_rows: usize, n_cols: usize) -> Vec<Vec<cell::Cell>> {
     let mut cells = Vec::with_capacity(n_rows);
-    for _ in 0..n_rows {
+    for i in 0..n_rows {
+      let y = i / n_rows * settings.universe.height;
       let mut row_cells = Vec::with_capacity(n_cols);
-      row_cells.fill(cell::Cell::default());
+      for j in 0..n_cols {
+        let x = j / n_cols * settings.universe.width;
+        let cell = cell::Cell {
+          lives: Default::default(),
+          origin: util::Coord { x, y },
+          color: settings.cells.color,
+          size: settings.cells.size,
+        };
+        row_cells.push(cell);
+      }
       cells.push(row_cells);
     }
 

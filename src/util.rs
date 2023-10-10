@@ -1,4 +1,8 @@
-#[derive(Debug, Copy, Clone)]
+use dioxus::prelude::*;
+use serde::Deserialize;
+
+
+#[derive(Default, Debug, Copy, Clone, Deserialize)]
 pub struct Color {
   pub red: u8,
   pub green: u8,
@@ -6,8 +10,12 @@ pub struct Color {
   pub alpha: u8
 }
 
-#[derive(Debug, Copy, Clone)]
+#[derive(Default, Debug, Copy, Clone)]
 pub struct Coord {
-  pub x: u16,
-  pub y: u16,
+  pub x: usize,
+  pub y: usize,
+}
+
+pub trait GameElement {
+  fn render (ctx: Scope) -> Element;
 }

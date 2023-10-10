@@ -1,6 +1,12 @@
-#[derive(Default, Clone)]
+use crate::util::{Coord, Color, GameElement};
+use dioxus::prelude::*;
+
+#[derive(Default, Debug, Copy, Clone)]
 pub struct Cell {
   pub lives: bool,
+  pub origin: Coord,
+  pub color: Color,
+  pub size: usize,
 }
 
 impl Cell {
@@ -11,13 +17,19 @@ impl Cell {
   }
 }
 
+impl GameElement for Cell {
+    fn render (ctx: Scope) -> Element {
+        todo!()
+    }
+}
+
 #[cfg(test)]
 mod tests {
   use super::*;
 
   #[test]
   fn update_life() {
-    let mut cell = Cell { lives: false };
+    let mut cell = Cell::default();
 
     // Tests for initially dead cell
     for i in 0..=9 {
