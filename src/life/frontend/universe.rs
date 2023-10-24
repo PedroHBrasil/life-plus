@@ -1,17 +1,16 @@
 use dioxus::prelude::*;
+use super::util;
 mod population;
 mod grid;
 
-pub struct Universe {
-  population: population::Population,
-  grid: grid::Grid,
+pub fn UniverseUi(cx: Scope) -> Element {
+  let (window_width, window_height) = util::get_window_size();
+  cx.render(rsx!(
+    // population::PopulationUi{},
+    grid::GridUi {
+      width: window_width,
+      height: window_height,
+    }
+  ))
 }
 
-impl Universe {
-  pub fn new(n_rows: usize, n_cols: usize, canvas_height: usize, canvas_width: usize, cell_size: usize) -> Self {
-    Self {
-      population: population::Population::new(n_rows, n_cols, canvas_height, canvas_width, cell_size),
-      grid: grid::Grid::new(n_rows, n_cols, canvas_height, canvas_width),
-    }
-  }
-}

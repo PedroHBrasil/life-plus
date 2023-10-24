@@ -8,12 +8,12 @@ mod frontend;
 pub fn run(cx: Scope) -> Element {
   // let settings = settings::Settings::default();
   // let life = Life::new(&settings);
-  let n_rows = 100;
-  let n_cols = 100;
+  // let n_rows = 100;
+  // let n_cols = 100;
 
-  let simulation = backend::Simulation::new(n_rows, n_cols);
+  // let simulation = backend::Simulation::new(n_rows, n_cols);
 
-  let cells_ref = use_ref(cx, || simulation.population.cells);
+  // let cells_ref = use_ref(cx, || simulation.population.cells);
 
   cx.render(rsx! {
     style {
