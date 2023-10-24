@@ -1,32 +1,29 @@
-use crate::settings;
-use dioxus::html::canvas;
 use dioxus::prelude::*;
 use std::{thread, env};
 use std::time::Duration;
 
-mod universe;
+mod backend;
+mod frontend;
 
 pub fn run(cx: Scope) -> Element {
+  // let settings = settings::Settings::default();
+  // let life = Life::new(&settings);
+  let n_rows = 100;
+  let n_cols = 100;
 
-  let mut life = use_state(cx, || Life::new());
-  let settings = settings::Settings::default();
+  let simulation = backend::Simulation::new(n_rows, n_cols);
+
+  let cells_ref = use_ref(cx, || simulation.population.cells);
 
   cx.render(rsx! {
-    life.universe.render(cx, &settings)
+    style {
+      {"html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+      }"}
+    },
+    frontend::Ui{}
   })
-}
-
-pub struct Life {
-  universe: universe::Universe,
-  speed: u64,
-}
-
-impl Life {
-  pub fn new() -> Self {
-    let settings = settings::Settings::default();
-    Self {
-      universe: universe::Universe::new(&settings),
-      speed: settings.universe.speed,
-    }
-  }
 }
