@@ -17,12 +17,14 @@ pub fn run(cx: Scope) -> Element {
 
   cx.render(rsx! {
     style {
-      {"html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        width: 100%;
-      }"}
+      {
+        "body {
+          margin: 0;
+          padding: 0;
+          height: 100%;
+          width: 100%;
+        }"
+      }
     },
     frontend::Ui{}
   })

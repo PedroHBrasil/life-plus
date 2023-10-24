@@ -9,9 +9,9 @@ pub struct GridUi {
 }
 
 pub fn GridUi(cx: Scope<GridUi>) -> Element {
-  let settings = use_shared_state::<settings::Settings>(cx);
-  let line_color = settings.unwrap().read().lines.color;
-  let cell_size = settings.unwrap().read().cells.size;
+  let settings = use_shared_state::<settings::Settings>(cx).unwrap().read();
+  let line_color = settings.lines.color;
+  let cell_size = settings.cells.size;
   let lines = make_lines(cell_size, cx.props.height, cx.props.width);
 
   cx.render(rsx!(
