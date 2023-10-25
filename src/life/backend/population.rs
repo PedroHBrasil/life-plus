@@ -1,39 +1,23 @@
-mod cell;
+pub mod cell;
 
 pub struct Population {
-  pub cells: Vec<Vec<cell::Cell>>,
+  pub cells: std::cell::RefMut<'static, Vec<Vec<cell::Cell>>>,
   n_rows: usize,
   n_cols: usize,
   alive_neighbors_counts: Vec<Vec<u8>>,
 }
 
 impl Population {
-  pub fn new(n_rows: usize, n_cols: usize) -> Self {
+  pub fn new(cells: std::cell::RefMut<'static, Vec<Vec<cell::Cell>>>) -> Self {
+    let n_rows = cells.len();
+    let n_cols = cells[0].len();
     Self {
-      cells: Self::init_cells(n_rows, n_cols),
+      cells,
       n_rows,
       n_cols,
       alive_neighbors_counts: Self::init_alive_neighbors_counts(n_rows, n_cols),
     }
   }
-
-  /// Initializes the cells
-  fn init_cells(n_rows: usize, n_cols: usize) -> Vec<Vec<cell::Cell>> {
-    let mut cells = Vec::with_capacity(n_rows);
-    for _ in 0..n_rows {
-      let mut row_cells = Vec::with_capacity(n_cols);
-      for _ in 0..n_cols {
-        let cell = cell::Cell {
-          lives: rand::random(),
-        };
-        row_cells.push(cell);
-      }
-      cells.push(row_cells);
-    }
-
-    cells
-  }
-
 
   fn init_alive_neighbors_counts(n_rows: usize, n_cols: usize) -> Vec<Vec<u8>> {
     let mut alive_neighbors_counts = Vec::with_capacity(n_rows);

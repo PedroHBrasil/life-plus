@@ -1,17 +1,17 @@
-mod population;
+pub mod population;
 
-pub struct Simulation {
-  pub population: population::Population,
-}
+// pub struct Simulation {
+//   pub population: population::Population,
+// }
 
-impl Simulation {
-  pub fn new(n_rows: usize, n_cols: usize) -> Self {
-    Self {
-      population: population::Population::new(n_rows, n_cols),
-    }
-  }
+// impl Simulation {
+//   pub fn new(n_rows: usize, n_cols: usize) -> Self {
+//     Self {
+//       population: population::Population::new(n_rows, n_cols),
+//     }
+//   }
 
-  pub fn update(&mut self) {
-    self.population.update();
-  }
-}
+//   pub fn update(&mut self) {
+//     self.population.update();
+//   }
+// }
